@@ -1,5 +1,5 @@
 SHELL                   := $(shell which bash) -o pipefail
-ABS_TOP                 := $(shell pwd)
+ABS_TOP                 := $(shell pwd) 
 # Convert to windows paths (C:/) requred by vivado
 # cygpath is included with git-bash, cygwin, msys2
 ifneq (, $(shell type -p cygpath))
@@ -8,7 +8,7 @@ endif
 SCRIPTS                 := $(ABS_TOP)/../scripts
 VIVADO                  ?= vivado
 VIVADO_OPTS             ?= -nolog -nojournal -mode batch
-FPGA_PART               ?= xc7z020clg400-1
+FPGA_PART               ?= XC7A100T-1CSG324C
 RTL                     += $(shell find $(ABS_TOP)/src -type f -name "*.v")
 RTL                     += $(ABS_TOP)/../EECS151.v
 CONSTRAINTS             += $(shell find $(ABS_TOP)/src -type f -name "*.xdc")
