@@ -381,12 +381,35 @@ Once you've completed the above, answer the following questions on the correspon
 For 1-6 below, submit the command/keystrokes needed to generate the desired result.  For 1-4, try generating only the desired result (no extraneous info). 
 
 1. List the 5 most recently modified items in `/usr/bin`
+   ls -lat /usr/bin | head -10
 2. What directory is `git` installed in?
+   /usr/bin/git
 3. Show the hidden files in your lab directory (the `lab1` folder in the repo you cloned from GitHub).
+   ls -la 
 4. What version of Vim is installed? Describe how you figured this out.
+   vim --version
+VIM - Vi IMproved 9.1 (2024 Jan 02, compiled Jan 16 2025 20:13:18)
+
 5. (optional) Make a new directory called `backup` within `/home/tmp/<your-eecs-username>`. Copy all the files in this lab directory to the new `backup` directory and then delete all the copies in the new directory.
 6. Run `ping www.google.com`, suspend it, then kill the process. Then run it in the background, report its PID, then kill the process.
+    ping www.google.com
+    PING www.google.com (2a00:1450:4001:801::2004) 56 data bytes
+    64 bytes from fra16s46-in-x04.1e100.net (2a00:1450:4001:801::2004): icmp_seq=1 ttl=118 time=10.7 ms
+    64 bytes from fra16s46-in-x04.1e100.net (2a00:1450:4001:801::2004): icmp_seq=2 ttl=118 time=12.3 ms
+    ^Z
+    [1]+  Stopped                 ping www.google.com
+    arun@arun-mainframe:~/Documents/FPGA_LABS/fpga_labs_sp24$ ps -ef | grep ping
+    arun        3006    2489  0 10:43 ?        00:00:00 /usr/libexec/gsd-housekeeping
+    arun       55531   47280  0 15:19 pts/5    00:00:00 ping www.google.com
+    arun       55538   47280  0 15:19 pts/5    00:00:00 grep --color=auto ping
+    arun@arun-mainframe:~/Documents/FPGA_LABS/fpga_labs_sp24$ kill -9 55531
+    arun@arun-mainframe:~/Documents/FPGA_LABS/fpga_labs_sp24$ jobs
+    [1]+  Killed                  ping www.google.com
+    arun@arun-mainframe:~/Documents/FPGA_LABS/fpga_labs_sp24$ jobs
+    arun@arun-mainframe:~/Documents/FPGA_LABS/fpga_labs_sp24$ 
+
 7. Run `top` and report the average CPU load, the highest CPU job, and the amount of memory used (just report the results for this question; you don't need to supply the command/how you got it).
+used htop and it gave .5 as load average and firefox as the task which used the most amount of CPU utilization. 
 
 
 
@@ -442,11 +465,19 @@ Skim through the following documents and submit answers for the questions below 
 
 ### Question 3: Understanding your FPGA
 1. How many LUTs, FFs, Block RAMs (number of 36Kb blocks), and DSP slices are on the xc7z020 FPGA?
+      LUTS 53.2k
+      FFs 106.4k
+      RAM 140*38Kb
+      220 DSP slices
 1. How many slices are in a single CLB?
+    two slices
 1. What is the difference between a SLICEL and a SLICEM?
+    sliceL for logic and sliceM for memory.
 1. How many LUTs are in a slice?
+    two 5 bit or 1 6bit LUT 
 1. How many inputs do each of the LUTs have?
 1. How many slices do you need to implement a logic function of 8 inputs?
+2² * 1 slice(6 bit input LUT)
 
 
 
