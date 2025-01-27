@@ -1,8 +1,8 @@
-module button_led
+module button_capture
 (
     input  logic clk_i,
     input  logic rst_n_i,
-    output logic led_o,
+    output logic button_toggle_o,
     input  logic button_i
 );
 timeunit 1ns/100ps;
@@ -38,11 +38,10 @@ timeunit 1ns/100ps;
   assign button_n_edge = !button_ff[0] & button_ff[1] & button_ff[2];
   assign button_pressed =  (button_ff[0] | button_ff[1]) | button_ff[2];
   assign button_not_pressed =  (!button_ff[0] | !button_ff[1]) | !button_ff[2];
-  assign led_o = led_ff;
-  assign led_n = led_toggle ^ led_ff;
+ 
 
   always_comb begin : state_machine
-    led_toggle = 0;
+    button_toggle_o = 0;
     timer_guard_n = timer_guard_ff;
     case (c_state)
     st_idle: begin
@@ -83,7 +82,7 @@ timeunit 1ns/100ps;
             timer_guard_n = timer_guard_ff +1;
             if (timer_guard_ff == '1) begin
                 n_state = st_idle;
-                led_toggle = 1;
+                button_toggle_o = 1;
             end
         end
     end
@@ -92,4 +91,4 @@ timeunit 1ns/100ps;
     end
     endcase
   end : state_machine
-endmodule : button_led
+endmodule : button_capture
